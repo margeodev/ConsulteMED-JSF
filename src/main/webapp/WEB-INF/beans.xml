@@ -1,0 +1,5 @@
+<beans>
+	<interceptors>
+		<class>br.com.consultemed.tx.GerenciadorDeTransacao</class>
+	</interceptors>
+</beans>

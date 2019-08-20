@@ -1,0 +1,92 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h1>#{(agendamentoBean.editando)?'Reagendar Consulta':'Novo Agendamento'}</h1>
+	<h:form id="formAgendamento">
+		<p:growl id="growl" showDetail="true" life="3000" />
+
+		<!-- ################ EXIBE TOOLBAR DE AGENDAMENTO ################ -->
+		<ui:include src="/WEB-INF/template/toolbars/toolbar-cadastrar-agendamento.xhtml" />
+
+		<p:fieldset legend="Agendamento de Consulta" style="margin-top:20px">
+			<p:panelGrid 
+				columns="2" 
+				style="width: 100%"
+				columnClasses="rotulo, campo">
+				
+				<p:outputLabel value="Paciente" for="paciente"/>
+				<p:autoComplete id="paciente" 					
+					scrollHeight="400"	
+					completeMethod="#{agendamentoBean.escolherPaciente}" 
+					value="#{agendamentoBean.agendamento.paciente}" 
+					var="paciente"	
+					itemLabel="#{paciente.nome}" 
+					itemValue="#{paciente}" 
+					forceSelection="true" 
+					size="40" 
+					minQueryLength="3"
+					disabled="#{agendamentoBean.editando}"/>
+		        
+		    <p:outputLabel for="medico" value="Selecione o Médico " />
+            <p:selectOneMenu 
+            	id="medico" 
+            	value="#{agendamentoBean.agendamento.medico}" 
+            	style="width:150px">
+            	
+                <p:ajax 
+                	listener="#{agendamentoBean.desabilitarDias}"
+                	update="formAgendamento:dataConsulta"
+                	process="@this"/>
+                <p:ajax 
+                	listener="#{agendamentoBean.zerarDiasAtendimento}"
+                	update="formAgendamento:dataConsulta"
+                	process="@this"/>
+                	
+                <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="false" />
+                <f:selectItems 
+                	value="#{agendamentoBean.medicos}" 
+                	var="medico" 
+                	itemLabel="#{medico.nome}"/>
+            </p:selectOneMenu>
+							
+				<p:outputLabel for="dataConsulta" value="Data da Consulta" />
+        		<p:datePicker 
+        			id="dataConsulta"
+        			readonlyInput="true"
+        			value="#{agendamentoBean.agendamento.dataAtendimento}" 
+        			disabledDays="#{agendamentoBean.invalidDays}"
+        			mindate="#{agendamentoBean.minDate}" 
+        			maxdate="#{agendamentoBean.maxDate}">
+        			<p:ajax 
+						event="dateSelect"
+						listener="#{agendamentoBean.iniciarHoras}"
+						update="formAgendamento:horas"/>
+        			</p:datePicker>        			
+        			
+        		<p:outputLabel for="horas" value="Hora da Consulta" />
+		        <p:selectOneMenu id="horas" value="#{agendamentoBean.agendamento.hora}" style="width:125px">
+		            <f:selectItem itemLabel="Selecione" itemValue="" />
+		            <f:selectItems 
+		            	value="#{agendamentoBean.horas}" 
+		            	var="hora"
+		            	itemLabel="#{hora.descricao}"
+		            	itemValue="#{hora}"/>
+		        </p:selectOneMenu>			        		
+			</p:panelGrid>	
+
+			<p:commandButton value="Salvar" action="#{agendamentoBean.salvar}"
+				process="@form" 
+				update="@form" 
+				style="margin-top: 15px"
+				icon="far fa-save" />
+
+		</p:fieldset>
+	</h:form>
+	
+	
+	
+
+</ui:composition>

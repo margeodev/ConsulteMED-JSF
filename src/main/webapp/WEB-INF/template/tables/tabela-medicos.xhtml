@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h1>Médicos Cadastrados</h1>
+	
+	<!-- ################ EXIBE TOOLBAR DE MÉDICOS ################ -->
+	<ui:include src="/WEB-INF/template/toolbars/toolbar-medico.xhtml" />
+	
+	<p:dataTable 
+		var="medico" 
+		value="#{medicoBean.medicos}"
+		id="tabelaMedicos" 
+		style="margin-top: 20px"
+		emptyMessage="Não existem médicos cadastrados">
+		
+		<f:facet name="header">Médicos</f:facet>
+		<p:column headerText="Nome">
+			<h:outputText value="#{medico.nome}" />
+		</p:column>
+
+		<p:column headerText="CRM">
+			<h:outputText value="#{medico.crm}" />
+		</p:column>
+
+		<p:column headerText="Dias de atendimento">
+			<h:outputText value="#{medico.diasAtendimento}" />
+		</p:column>
+				
+		<p:column headerText="Ações" styleClass="acoes">
+			<h:form>
+				<p:growl id="growl" showDetail="true" life="3000" />
+				<p:growl id="message" showDetail="true" />
+												
+				<p:commandLink update="message">
+					<i class="far fa-trash-alt"></i>
+			        <p:confirm header="Excluir Médico" message="Tem certeza que deseja excluir o médico #{medico.nome}?" icon="pi pi-exclamation-triangle" />
+			    </p:commandLink>
+
+				<h:link outcome="/medicos/cadastrar-medico.xhtml" style="margin-left:10px">
+					<i class="fas fa-pencil-alt"></i>
+					<f:param name="medico" value="#{medico.id}" />
+				</h:link>	
+				
+				<!-- ####### DIALOG PARA CONFIRMAÇÃO DE EXCLUSÃO ####### -->
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			        <p:commandButton 
+			        	value="Sim" 
+			        	action="#{medicoBean.remover(medico)}" 
+			        	styleClass="ui-confirmdialog-yes" 
+			        	icon="pi pi-check"
+			        	update="tabelaMedicos"/>
+			        	
+			        <p:commandButton 
+			        	value="Não" 
+			        	type="button" 
+			        	styleClass="ui-confirmdialog-no" 
+			        	icon="pi pi-times" />
+			        	
+			    </p:confirmDialog>			
+			</h:form>
+		</p:column>
+	</p:dataTable>
+
+</ui:composition>

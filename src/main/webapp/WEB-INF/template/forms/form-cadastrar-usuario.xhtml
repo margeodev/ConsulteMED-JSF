@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h1>#{(usuarioBean.editando)?'Editar Usuário':'Novo Usuário'}</h1>
+	<h:form>
+		<p:growl id="growl" showDetail="true" life="3000" />
+
+		<!-- ################ EXIBE TOOLBAR DE USUÁRIO ################ -->
+		<ui:include src="/WEB-INF/template/toolbars/toolbar-usuario.xhtml" />
+
+		<p:fieldset legend="Dados do Usuário" style="margin-top:20px">
+			<p:panelGrid columns="2" style="width: 100%"
+				columnClasses="rotulo, campo">
+
+				<p:outputLabel for="nome" value="Nome:" />
+				<p:inputText id="nome" 
+					value="#{usuarioBean.usuario.nome}"
+					required="true" 
+					size="50" 
+					requiredMessage="Nome é obrigatório"
+					validatorMessage="O nome pode ter no máximo 100 caracteres.">
+					<f:validateLength maximum="100" />
+				</p:inputText>
+
+				<p:outputLabel for="email" value="Email:" />
+				<p:inputText id="email" 
+					value="#{usuarioBean.usuario.email}"
+					required="true" 
+					size="50" 
+					requiredMessage="Email é obrigatório"
+					validatorMessage="O email pode ter no máximo 100 caracteres.">
+					<f:validateLength maximum="100" />
+				</p:inputText>
+				
+	    		<p:outputLabel for="grupo" value="Grupo:" />
+            	<p:selectOneMenu 
+	            	id="grupo" 
+	            	value="#{usuarioBean.usuario.grupo}"
+	            	style="width:150px">              
+                	
+                <f:selectItem itemLabel="Selecione"	noSelectionOption="false"/>
+                <f:selectItems 
+                	value="#{usuarioBean.grupos}" 
+                	var="grupo" 
+                	itemLabel="#{grupo.nome}"/>
+            </p:selectOneMenu>
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
+
+				<p:outputLabel for="login" value="Login:" />
+				<p:inputText id="login" 
+					value="#{usuarioBean.usuario.login}"
+					required="true" size="30" 
+					requiredMessage="Login é obrigatório"
+					validatorMessage="O login pode ter no máximo 100 caracteres.">
+					<f:validateLength maximum="100" />
+				</p:inputText>
+
+				<p:outputLabel for="senha" value="Senha" />
+				<p:inputText id="senha" 
+					value="#{usuarioBean.usuario.senha}"
+					required="true" size="30" 
+					requiredMessage="Senha é obrigatória"
+					validatorMessage="A senha pode ter no máximo 100 caracteres.">
+					<f:validateLength maximum="100" />
+				</p:inputText>
+			</p:panelGrid>
+
+			<p:commandButton value="Salvar" action="#{usuarioBean.salvar}"
+				process="@form" update="@form" style="margin-top: 15px"
+				icon="far fa-save" />
+
+		</p:fieldset>
+	</h:form>
+
+</ui:composition>

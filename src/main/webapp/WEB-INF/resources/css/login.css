@@ -1,0 +1,38 @@
+body {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	font-weight: normal;
+	background: #1A7CCD;
+	display: flex;
+	justify-content: center;
+}
+
+#login-dialog {
+	display: flex;
+	justify-content: center;
+	width: 280px;
+	border-radius: 10px;
+	margin: 0 auto;
+	margin-top: 150px;
+	background: azure;
+	text-align: center;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+#login-dialog input {
+	margin-bottom: 15px;
+	height: 25px;
+	width: 95%;
+}
+
+.ui-button {
+	height: 40px;
+	width: 100%;
+	margin-bottom: 30px;
+	color: #fff;
+}
+
+.login-fields {
+	width: 90%;
+}

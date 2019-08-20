@@ -1,0 +1,121 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	color: #264275;
+}
+
+
+
+.navbar {
+	background-image: linear-gradient(to right top, #1f496b, #1c5784, #19649f, #1772b9,
+		#1b80d5);
+	display: flex;
+	justify-content: center;
+}
+
+.navbar-inner {
+	width: 1024px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.logotipo {
+	display: flex;
+	align-items: center;
+}
+
+.logotipo h1 {
+	font-size: 28px;
+	color: #f2f2f2;
+	margin-left: 5px;
+}
+
+.logotipo img {
+	max-width: 70px;
+	max-height: 70px;
+	margin: 10px;
+}
+
+.itens {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+}
+
+.itens a {
+	color: #f2f2f2;
+	text-decoration: none;
+	margin-right: 30px;
+}
+
+.ui-sidebar {
+    position: fixed;
+    padding: 0 !important; 
+    -webkit-transition: transform .3s;
+    transition: transform .3s;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.navbar .ui-widget-content {
+	border: 1px solid #a8a8a8;
+	background: #1D4C72;
+	color: #FFF;
+	opacity: 0.90;
+	-moz-opacity: 0.90;
+	filter: alpha(opacity = 90);
+}
+
+.navbar a.ui-link.ui-widget a {
+    color: #222 !important;
+}
+
+.mainmenu {
+	list-style: none;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+.mainmenu a {
+	display: block;
+	background-color: #1B5E92;
+	text-decoration: none;
+	padding: 15px;
+	color: #FFF;
+	margin-bottom: 3px;
+	padding-left: 30px;
+}
+
+/* add hover behaviour */
+.mainmenu a:hover {
+	background-color: #1770B6;
+}
+
+.navbar-usuario {
+	 margin-bottom: 15px;
+	 border-bottom: 1px solid rgb(226, 226, 226);
+	 padding: 15px;
+	 padding-left: 30px;
+	 text-transform: uppercase;
+	 font-weight: bold;
+	 color: #fff;
+}
+
+.svg-inline--fa {
+    font-size: 20px;
+}
+
+.rotulo {
+	width: 150px;
+}
+
+/* TABELA  DE PACIENTES*/
+.acoes {
+	width: 80px;
+	text-align: center;
+}
+
+.telefone {
+	width: 150px;
+}

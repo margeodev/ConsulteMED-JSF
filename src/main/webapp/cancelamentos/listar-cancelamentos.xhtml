@@ -1,0 +1,30 @@
+<ui:composition template="/WEB-INF/template/layout-padrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Agendamento de Consultas</ui:define>
+	<ui:define name="corpo">
+	
+		<f:metadata>
+    		<f:event listener="#{cancelamentoBean.inicializar}" type="preRenderView" />    		
+    	</f:metadata>
+
+		<h1>Agendamentos Cancelados</h1>		
+		<h:form>
+			<!-- ################ EXIBE TOOLBAR DE CANCELAMENTO ################ -->
+			<ui:include src="/WEB-INF/template/toolbars/toolbar-pesquisar-cancelamentos.xhtml" />		
+			
+			<!-- ################ EXIBE FORMULÁRIO DE PESQUISA DE CANCELAMENTO ################ -->
+			<ui:include src="/WEB-INF/template/forms/form-pesquisar-cancelamento.xhtml" /> 
+
+			<!-- ################ EXIBE TABELA DE AGENDAMENTOS FILTRADOS ################ -->
+			<ui:include src="/WEB-INF/template/tables/tabela-cancelamentos.xhtml" />
+			
+		</h:form>
+		
+	</ui:define>
+
+</ui:composition>

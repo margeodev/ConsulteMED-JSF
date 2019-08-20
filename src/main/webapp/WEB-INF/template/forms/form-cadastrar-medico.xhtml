@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h1>#{(medicoBean.medico.id != null)?'Editar Médico':'Novo Médico'}</h1>
+	<h:form>
+		<p:growl id="growl" showDetail="true" life="3000" />
+
+		<!-- ################ EXIBE TOOLBAR DE MÉDICO ################ -->
+		<ui:include src="/WEB-INF/template/toolbars/toolbar-medico.xhtml" />
+
+		<p:fieldset legend="Dados do Médico" style="margin-top:20px">
+			<p:panelGrid columns="2" style="width: 100%"
+				columnClasses="rotulo, campo">
+					
+				<!-- <p:outputLabel value="Médico" for="medico"/>
+				<p:autoComplete id="medico" 					
+					scrollHeight="400"	
+					completeMethod="#{medicoBean.escolherUsuario}" 
+					value="#{medicoBean.medico.usuario}" 
+					var="usuario"	
+					itemLabel="#{usuario.nome}" 
+					itemValue="#{usuario}" 
+					forceSelection="true" 
+					size="40" 
+					minQueryLength="3"/> -->
+
+				<p:outputLabel for="nome" value="Nome:" />
+				<p:inputText id="nome" 
+					value="#{medicoBean.medico.nome}"
+					required="true" 
+					requiredMessage="Nome é obrigatório"
+					validatorMessage="O Nome pode ter no máximo 100 caracteres.">
+					<f:validateLength maximum="100" />
+				</p:inputText>
+
+				<p:outputLabel for="crm" value="CRM:" />
+				<p:inputText id="crm" 
+					value="#{medicoBean.medico.crm}"
+					required="true" 
+					size="20" 
+					requiredMessage="CRM é obrigatório"
+					validatorMessage="O CRM pode ter no máximo 20 caracteres.">
+					<f:validateLength maximum="20" />
+				</p:inputText>
+				
+				<h:outputLabel for="multiple" value="Dias de Atendimento" />
+		        <p:selectCheckboxMenu 
+		        	id="multiple"
+		        	value="#{medicoBean.diasAtendimentoStr}" 
+		        	multiple="true"
+                    panelStyle="width:200px">
+		            <f:selectItems value="#{medicoBean.dias}" />
+		        </p:selectCheckboxMenu>
+        
+			</p:panelGrid>
+
+			<p:commandButton value="Salvar" 
+				action="#{medicoBean.salvar}"
+				process="@form" 
+				update="@form" 
+				style="margin-top: 15px"
+				icon="far fa-save" /> 
+			
+		</p:fieldset>
+	</h:form>
+
+</ui:composition>
