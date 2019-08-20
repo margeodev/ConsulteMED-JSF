@@ -56,6 +56,40 @@
 			<p:growl id="growl" showDetail="true" life="3000" />
 			<p:growl id="message" showDetail="true" />
 			
+			<!-- ########## CANCELAR / ATIVAR ########## -->	
+			<p:commandLink
+		     	id="mudaStatus" 
+		     	disabled="#{agendamento.dataExpirada}"
+		     	update="tabelaAgendamentos"
+		     	action="#{pesquisaAgendamentoBean.mudarStatusAgendamento(agendamento)}" 
+		     	style="margin-right:10px;">
+				<i class="#{agendamento.status.descricao == 'Ativa' ? 'fa fa-toggle-on' : 'fa fa-toggle-off'}"/>		        			        	
+		    </p:commandLink>
+		  	<p:tooltip 
+		    	for="mudaStatus" 
+		    	value="#{agendamento.status.descricao == 'Ativa' ? 'Cancelar Agendamento' : 'Ativar Agendamento'}" 
+		    	position="left"/>					    
+		    
+		    <!-- ########## EDITAR ########## -->	
+		    <h:link
+				id="alterar"
+				rendered="#{!agendamento.dataExpirada}"
+				outcome="/agendamentos/cadastrar-agendamento.xhtml" 
+				style="margin-right:10px">
+				<i class="fas fa-pencil-alt"/>
+				<f:param name="agendamento" value="#{agendamento.id}" />
+			</h:link>
+			<p:commandLink
+		     	disabled="#{agendamento.dataExpirada}"
+		     	rendered="#{agendamento.dataExpirada}"
+		     	style="margin-right:10px;">
+		     	<i class="fas fa-pencil-alt"/>
+			</p:commandLink>
+			<p:tooltip 
+		    	for="alterar" 
+		    	value="Reagendar Consulta" 
+		    	position="left"/>				
+			
 			<!-- ########## EXCLUIR ########## -->							
 			<p:commandLink			
 				disabled="#{agendamento.dataExpirada}"
@@ -70,42 +104,7 @@
 		    <p:tooltip 
 		    	for="excluir" 
 		    	value="Excluir Agendamento" 
-		    	position="left"/>		    
-		    
-		    <!-- ########## EDITAR ########## -->	
-		    <h:link
-				id="alterar"
-				rendered="#{!agendamento.dataExpirada}"
-				outcome="/agendamentos/cadastrar-agendamento.xhtml" 
-				style="margin-left:10px">
-				<i class="fas fa-pencil-alt"></i>
-				<f:param name="agendamento" value="#{agendamento.id}" />
-			</h:link>
-			<p:commandLink
-		     	disabled="#{agendamento.dataExpirada}"
-		     	rendered="#{agendamento.dataExpirada}"
-		     	style="margin-left:10px;">
-		     	<i class="fas fa-pencil-alt"/>
-			</p:commandLink>
-			<p:tooltip 
-		    	for="alterar" 
-		    	value="Reagendar Consulta" 
-		    	position="left"/>				
-			
-			<!-- ########## CANCELAR / ATIVAR ########## -->	
-			<p:commandLink
-		     	id="mudaStatus" 
-		     	disabled="#{agendamento.dataExpirada}"
-		     	update="tabelaAgendamentos"
-		     	action="#{pesquisaAgendamentoBean.mudarStatusAgendamento(agendamento)}" 
-		     	style="margin-left:10px;">
-				<i class="#{agendamento.status.descricao == 'Ativa' ? 'fa fa-toggle-on' : 'fa fa-toggle-off'}"></i>
-		        			        	
-		    </p:commandLink>
-		  	<p:tooltip 
-		    	for="mudaStatus" 
-		    	value="#{agendamento.status.descricao == 'Ativa' ? 'Cancelar Agendamento' : 'Ativar Agendamento'}" 
-		    	position="left"/>		    				
+		    	position="left"/>	    				
 			
 			<!-- ####### DIALOG PARA CONFIRMAÇÃO DE EXCLUSÃO ####### -->
 			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
