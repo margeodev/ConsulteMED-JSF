@@ -9,9 +9,16 @@
 	<!-- ################ EXIBE TOOLBAR DE USUÁRIO ################ -->
 	<ui:include src="/WEB-INF/template/toolbars/toolbar-usuario.xhtml" />	
 	
-	<p:dataTable var="usuario" value="#{usuarioBean.usuarios}"
-		id="tabelaUsuarios" style="margin-top: 20px"
+	<p:dataTable 
+		var="usuario" 
+		value="#{usuarioBean.usuarios}"
+		id="tabelaUsuarios" 
+		style="margin-top: 20px"
+		paginator="true"
+		rows="5"
+		paginatorPosition="bottom"
 		emptyMessage="Não existem usuários cadastrados">
+		
 		<f:facet name="header">Usuários</f:facet>
 		<p:column headerText="Nome">
 			<h:outputText value="#{usuario.nome}" />

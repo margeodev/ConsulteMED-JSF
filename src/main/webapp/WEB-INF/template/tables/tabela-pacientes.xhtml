@@ -9,9 +9,16 @@
 	<!-- ################ EXIBE TOOLBAR DE USUÁRIO ################ -->
 	<ui:include src="/WEB-INF/template/toolbars/toolbar-paciente.xhtml" />
 	
-	<p:dataTable var="paciente" value="#{pacienteBean.pacientes}"
-		id="tabelaPacientes" style="margin-top: 20px"
+	<p:dataTable 
+		var="paciente" 
+		value="#{pacienteBean.pacientes}"
+		id="tabelaPacientes" 
+		style="margin-top: 20px"
+		paginator="true"
+		rows="5"
+		paginatorPosition="bottom"
 		emptyMessage="Não existem pacientes cadastrados">
+		
 		<f:facet name="header">Pacientes Cadastrados</f:facet>
 		<p:column headerText="Nome">
 			<h:outputText value="#{paciente.nome}" />

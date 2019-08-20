@@ -4,9 +4,16 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:dataTable var="contato" value="#{pacienteBean.contatos}"
-		id="tabelaContatos" style="margin-top: 20px"
+	<p:dataTable 
+		var="contato" 
+		value="#{pacienteBean.contatos}"
+		id="tabelaContatos" 
+		style="margin-top: 20px"
+		paginator="true"
+		rows="5"
+		paginatorPosition="bottom"
 		emptyMessage="Nenhum contato adicionado">
+		
 		<f:facet name="header">Contatos</f:facet>
 		<p:column headerText="Nome">
 			<h:outputText value="#{contato.nome}" />
